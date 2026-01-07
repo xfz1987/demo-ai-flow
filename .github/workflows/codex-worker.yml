@@ -4,9 +4,9 @@ on:
   push:
     branches: [main]
     paths:
-      - task.md
-      - .ai/plan.md
-      - .ai/decision.md
+      - .flow/task.md
+      - .flow/plan.md
+      - .flow/decision.md
 
 jobs:
   codex:
@@ -21,8 +21,8 @@ jobs:
       - uses: openai/codex-action@v1
         with:
           prompt: |
-            Read task.md, .ai/plan.md, .ai/decision.md.
-            Modify code strictly according to .ai/plan.md and constraints in .ai/decision.md.
+            Read .flow/task.md, .flow/plan.md, .flow/decision.md.
+            Modify code strictly according to .flow/plan.md and constraints in .flow/decision.md.
             Only change src/app.js.
-            Append a short log of what you changed into .ai/execution.log.
+            Append a short log of what you changed into .codex/execution.log.
             Create a pull request with a clear title and description referencing the tasks.

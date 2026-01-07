@@ -52,3 +52,34 @@ demo-ai-flow/
 │
 └─ .claude/
 └─ settings.json #（可选）约束 Claude 不越权
+
+.flow/
+├─ decision.md # 当前“是否允许执行”的裁决（闸口）
+├─ plan.md # 已批准的可执行计划
+├─ task.md # Codex 实际执行的任务清单（触发源）
+└─ status.md # 当前阶段（可选）
+
+    •	写：Claude（基于 Gemini 的决策）
+    •	读：
+    •	Codex（是否执行、怎么执行）
+    •	Claude（是否继续产出）
+    •	CI / workflow（是否放行）
+
+.gemini/
+├─ principles.md # 长期技术原则
+└─ decisions/
+└─ └─ ADR-001.md # 架构 / 风险 / 边界决策
+
+.claude/
+├─ commands/ # slash command 定义
+└─ settings.json # MCP / 环境配置
+
+.codex/
+├─ README.md # Codex 的职责说明
+└─ execution.log # 每次执行的摘要（可选）
+
+.flow 决定“能不能做”，
+.gemini 解释“为什么这么定”，
+.claude 提供“怎么操作系统”，
+.codex 记录“到底做了什么”，
+scripts 保证“一切动作可控”。
