@@ -1,0 +1,19 @@
+name: Claude Review
+
+on:
+  pull_request:
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      # 这里用 Claude 的 Action 做 PR Review（你后面配置好对应的密钥/参数即可）
+      - uses: anthropic/claude-code-action@v1
+        with:
+          review: true
+          prompt: |
+            You are a code review assistant.
+            Review the changes in this pull request.
+            Provide constructive feedback on code quality, correctness, and adherence to best practices.
+            Suggest improvements where necessary.
+            Summarize your review in a clear and concise manner.

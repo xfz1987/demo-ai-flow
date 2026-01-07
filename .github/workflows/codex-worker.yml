@@ -1,0 +1,28 @@
+name: Codex Worker
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - task.md
+      - .ai/plan.md
+      - .ai/decision.md
+
+jobs:
+  codex:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      # 这里用 Codex Action 来读取 task/plan/decision 并按约束改代码、写 execution.log、开 PR
+      - uses: openai/codex-action@v1
+        with:
+          prompt: |
+            Read task.md, .ai/plan.md, .ai/decision.md.
+            Modify code strictly according to .ai/plan.md and constraints in .ai/decision.md.
+            Only change src/app.js.
+            Append a short log of what you changed into .ai/execution.log.
+            Create a pull request with a clear title and description referencing the tasks.
