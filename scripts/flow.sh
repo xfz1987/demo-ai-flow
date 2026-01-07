@@ -22,15 +22,20 @@ case "${1:-}" in
     ;;
 
   push)
-    msg="${2:-chore: update flow files}"
+    msg="${2:-chore: trigger codex via .flow/task.md}"
+
+    # ---- strict whitelist ----
     git add \
-      .flow/decision.md .flow/plan.md .flow/task.md \
-      .gemini/principles.md .gemini/decisions/ADR-001.md \
-      .codex/execution.log \
+      .flow/decision.md \
+      .flow/plan.md \
+      .flow/task.md \
+      .gemini/principles.md \
+      .gemini/decisions \
       .claude/commands \
       scripts/flow.sh \
-      .github/workflows \
+      .codex/execution.log \
       2>/dev/null || true
+    # --------------------------
 
     if git diff --cached --quiet; then
       echo "Nothing to commit."
@@ -39,7 +44,7 @@ case "${1:-}" in
 
     git commit -m "$msg"
     git push
-    echo "Pushed."
+    echo "Pushed workflow changes."
     ;;
 
   *)

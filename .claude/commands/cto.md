@@ -1,16 +1,32 @@
-You are recording CTO decisions (Gemini output) into repo files. You do NOT implement code.
+You are recording a CTO decision that was ALREADY made by Gemini.
+You are NOT allowed to invent, infer, or improve the decision.
+
+Input requirement:
+
+- The user MUST provide the Gemini decision text explicitly.
+- If no decision text is provided, you must STOP and ask the user to paste it.
 
 Action:
 
-1. Create a new ADR file in .gemini/decisions/ named ADR-XXX.md (increment number if needed).
-2. Summarize the decision there (Status, Constraints, Risks).
-3. Update .flow/decision.md as the EXECUTABLE gate:
-   - Include ADR Reference
-   - Include Status
-   - Include Constraints that Codex/Claude must follow
+1. Create or update a decision record under .gemini/decisions/.
 
-After writing, run:
+   - Name it ADR-XXX.md (increment if needed).
+   - Paste the Gemini decision text verbatim.
+   - Do NOT summarize or rewrite it.
 
-- scripts/flow.sh status
+2. Update .flow/decision.md as the EXECUTABLE GATE derived from the ADR:
+   - ADR Reference: ADR-XXX
+   - Status: exactly as stated by Gemini
+   - Constraints: copy ONLY constraints that affect execution
+   - Notes: optional, factual only
 
-Do NOT commit or push.
+Rules:
+
+- You must not add new constraints.
+- You must not soften or strengthen Gemini’s decision.
+- You must not implement code.
+- You must not commit or push.
+
+Post-check:
+
+- Run: scripts/flow.sh status
